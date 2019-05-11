@@ -1,6 +1,6 @@
-const c = 30;
-const G = 6;
-const deltaTime = 0.1;
+const c = 3;
+const G = 6.6 * (10^-11)
+const deltaTime = 1;
 
 let firstBH;
 let photons = [];
@@ -8,15 +8,15 @@ let photons = [];
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     ellipseMode(RADIUS);
-    firstBH = new blackhole(window.innerWidth / 2, window.innerHeight / 2, 6500);
-
+    firstBH = new blackhole(window.innerWidth / 2, window.innerHeight / 2, 5.6 * (10^24));
+    Tracker = new Tracker()
 
     let start = height / 2;
-    let end = height / 2 - firstBH.rs * 2.6;
-    for (let i = end; i < start; i++) {
-        photons.push(new Photon(width - 30, i))
+    let end = height / 2 - firstBH.rs * 1.4;
+    // for (let i = end; i < start; i+=10) {
+        photons.push(new Photon(width - 30, end))
 
-    }
+    // }
 }
 
 function draw() {
@@ -27,5 +27,7 @@ function draw() {
         firstBH.gravitationalPull(photon);
         photon.update()
         photon.show()
+        Tracker.draw(firstBH, photon)
     });
+
 }
