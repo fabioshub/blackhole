@@ -1,6 +1,8 @@
-const c = 3;
-const G = 6.6 * (10^-11)
-const deltaTime = 1;
+const c = 30;
+const G = 6.11
+const deltaTime = 0.4;
+const maxOrbit = 2.997270254
+let acc = 1;
 
 let firstBH;
 let photons = [];
@@ -8,15 +10,19 @@ let photons = [];
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     ellipseMode(RADIUS);
-    firstBH = new blackhole(window.innerWidth / 2, window.innerHeight / 2, 5.6 * (10^24));
+    firstBH = new blackhole(window.innerWidth / 2, window.innerHeight / 2, 5000);
     Tracker = new Tracker()
 
     let start = height / 2;
-    let end = height / 2 - firstBH.rs * 1.4;
-    // for (let i = end; i < start; i+=10) {
-        photons.push(new Photon(width - 30, end))
+    let end = height / 2 - firstBH.rs * maxOrbit;
 
-    // }
+    photons.push(new Photon(width - 30, end))
+
+    for (let i = mouseY - 100; i < mouseY + 20; i += 10) {
+        photons.push(new Photon(width - 30, i))
+
+    }
+
 }
 
 function draw() {

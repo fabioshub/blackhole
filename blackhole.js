@@ -3,6 +3,8 @@ class blackhole {
         this.position = createVector(x, y);
         this.mass = mass;
         this.rs = (2 * G * this.mass) / (c * c);
+        this.end = height / 2 - this.rs * maxOrbit;
+
     }
 
     gravitationalPull = (photon) => {
@@ -13,9 +15,26 @@ class blackhole {
         photon.velocity.add(force);
         photon.velocity.setMag(c)
 
-        if (force.mag() > this.position.mag()) {
-            photon.stop()
+        if (r < 1) {
+            // let temp = this.maxOrbit.toString();
+            // const lastDigit = temp[myString.length - 1];
+            // const newDigit = int(lastDigit) + 1;
+
+            photons = []
+            for (let i = mouseY - 100; i < mouseY + 20; i += 10) {
+                photons.push(new Photon(mouseX, i))
+
+            }
+        } else if (r > this.rs + height) {
+            photons = []
+
+            console.log('hit out')
+            for (let i = mouseY - 100; i < mouseY + 20; i += 10) {
+                photons.push(new Photon(mouseX, i))
+
+            }
         }
+
     }
 
     show() {

@@ -1,7 +1,7 @@
 class Photon {
     constructor(x, y) {
         this.position = createVector(x, y);
-        this.velocity = createVector(c, 0);
+        this.velocity = createVector(-c, 0);
         this.trail = [];
         this.stopped = false;
     }
@@ -15,13 +15,13 @@ class Photon {
             this.trail.push(this.position.copy())
             const copyOfSpeed = this.velocity.copy();
             copyOfSpeed.mult(deltaTime);
-            this.position.sub(copyOfSpeed);
-    
-            if (this.trail.length > 20) {
+            this.position.add(copyOfSpeed);
+
+            if (this.trail.length > 10) {
                 this.trail.splice(0, 1);
             }
         }
-       
+
     }
 
 
@@ -37,7 +37,7 @@ class Photon {
         beginShape();
         this.trail.forEach(i => {
             vertex(i.x, i.y)
-        }); 
+        });
         endShape();
         // console.log(this.velocity.x, this.velocity.y)
     }
